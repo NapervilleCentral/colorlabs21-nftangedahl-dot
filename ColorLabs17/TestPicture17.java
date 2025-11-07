@@ -6,7 +6,7 @@
  * @author (Kevin Hayes)
  * @version (10-19-2016)
  */
-import java.awt.*;
+import java.awt.*; //the color classin awt lib
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
 public class TestPicture17
@@ -19,7 +19,7 @@ public class TestPicture17
   public static void main(String[] args)
   {
       //opens picture using a dialog box
-      /**/
+      /*
      String fileName = FileChooser.pickAFile();
      Picture pictObj = new Picture(fileName);
      pictObj.explore();
@@ -27,14 +27,16 @@ public class TestPicture17
      //opens a pictue using a path
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
-     //relative path
+     //relative path dir/folder/file*/
+     //know it love it live it!!!!!!!!!!!!!!!!!!
      Picture apic = new Picture("images\\beach.jpg");
      Picture ferris1 = new Picture("images/2000 ferris wheel2.jpg");
-     Picture ferris2 = new Picture("images/2000 ferris wheel2.jpg");
+     Picture moto = new Picture("images/redMotorcycle.jpg");
      Picture ferris3 = new Picture("images/2000 ferris wheel2.jpg");
 
-     //apic.explore();
+     //apic.explore(); displays the picture
      ferris1.explore();
+     moto.explore();
      
      //makes an array of pixels
      Pixel[] pixels;
@@ -50,6 +52,17 @@ public class TestPicture17
     System.out.println(pixels[17]);
     //access each pixel
     Pixel spot = ferris1.getPixel(100,100);
+    Pixel ferr17 = pixels[17];
+    ferr17.setRed(240);
+    ferr17.setGreen(160);
+    ferr17.setBlue(200);
+    
+    Color newColor = new Color(255,99,71);
+    spot.setColor(newColor);
+    
+    
+    
+    ferris1.explore();
     
     System.out.println(pixels[17].getColor());
     System.out.println(spot);
