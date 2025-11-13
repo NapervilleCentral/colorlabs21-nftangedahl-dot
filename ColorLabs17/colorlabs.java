@@ -9,14 +9,14 @@ public class colorlabs
 {
     public static void main(String[] args)
     {
-        Picture image = new Picture("images/butterfly1.jpg");
-        Picture image2 = new Picture("images/butterfly1.jpg");
-        Picture image3= new Picture("images/butterfly1.jpg");
-        Picture image4 = new Picture("images/butterfly1.jpg");
-        Picture image5 = new Picture("images/butterfly1.jpg");
-        Picture image6 = new Picture("images/butterfly1.jpg");
-        Picture image7 = new Picture("images/butterfly1.jpg");
-        Picture image8 = new Picture("images/butterfly1.jpg");
+        Picture image = new Picture("images/mepic.JPG");
+        Picture image2 = new Picture("images/mepic.JPG");
+        Picture image3= new Picture("images/mepic.JPG");
+        Picture image4 = new Picture("images/mepic.JPG");
+        Picture image5 = new Picture("images/mepic.JPG");
+        Picture image6 = new Picture("images/mepic.JPG");
+        Picture image7 = new Picture("images/mepic.JPG");
+        Picture image8 = new Picture("images/mepic.JPG");
         
         image.explore();  // show original
 
