@@ -7,7 +7,8 @@
  */
 import java.awt.*;
 import java.util.*;
-import java.util.List; // resolves problem with java.awt.List and java.util.List
+import java.util.List;
+import java.awt.Color; // resolves problem with java.awt.List and java.util.List
 
 public class SheparFaireyLab
 {
@@ -17,24 +18,11 @@ public class SheparFaireyLab
      */
     public static void main(String[] args)
     {
+            /**
+             * method 1 
+             */
         
-         //opens selfie picture 
-          /**/
-         String fileName = FileChooser.pickAFile();
-         Picture pictObj = new Picture(fileName);
-         pictObj.explore();
-         
-         //relative path
-         Picture apic = new Picture("images\\beach.jpg");
-         //change with selfie picture
-         Picture me = new Picture("images/beach.jpg");
-         Picture me1 = new Picture("images/beach.jpg");
-         Picture me2 = new Picture("images/beach.jpg");
-         
-         /**
-          * method 1 change
-          * 
-          */
+
          
          /**
           * method 2 change
