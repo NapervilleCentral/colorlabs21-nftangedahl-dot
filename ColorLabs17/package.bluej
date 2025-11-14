@@ -1,5 +1,5 @@
 #BlueJ package file
-dependency1.from=ManipulationOfColorsLab
+dependency1.from=SheparFaireyLab
 dependency1.to=Pixel
 dependency1.type=UsesDependency
 editor.fx.0.height=696
@@ -9,19 +9,11 @@ editor.fx.0.y=295
 objectbench.height=93
 objectbench.width=760
 package.divider.horizontal=0.6
-<<<<<<< HEAD
-package.divider.vertical=0.8003731343283582
-package.editor.height=422
-package.editor.width=684
-package.editor.x=686
-package.editor.y=94
-=======
 package.divider.vertical=0.8
 package.editor.height=393
 package.editor.width=670
 package.editor.x=251
 package.editor.y=124
->>>>>>> 601b6f7e0bc64a9b5220c4d9a302360b838e946f
 package.frame.height=600
 package.frame.width=800
 package.numDependencies=1
@@ -35,12 +27,12 @@ readme.width=49
 readme.x=10
 readme.y=10
 target1.height=70
-target1.name=ManipulationOfColorsLab
+target1.name=colorlabs
 target1.showInterface=false
 target1.type=ClassTarget
-target1.width=190
-target1.x=320
-target1.y=120
+target1.width=120
+target1.x=140
+target1.y=190
 target2.height=50
 target2.name=TestPicture17
 target2.naviview.expanded=false
