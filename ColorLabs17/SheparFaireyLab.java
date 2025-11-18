@@ -42,7 +42,6 @@ public class SheparFaireyLab
          }
 
          image.explore();
-         image.write("images/SFtry1.jpg");   // save Method 1 result
          
          
         //method 2
@@ -92,7 +91,6 @@ public class SheparFaireyLab
         }
 
         image2.explore();
-        image2.write("images/SFtry2.jpg");   // save Method 2 result
         
     
         //method 3 TRY 1
@@ -128,7 +126,7 @@ public class SheparFaireyLab
         }
 
         image3.explore();
-        image3.write("images/SFtry3.jpg");   // save Method 3 Try 1
+        image3.write("images/SFtry1.jpg");   // save Method 3 Try 1
         */
         
         
