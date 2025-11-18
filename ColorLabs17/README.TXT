@@ -10,3 +10,7 @@ VERSION or DATE:
 HOW TO START THIS PROJECT:
 AUTHORS:
 USER INSTRUCTIONS:
+
+Input: Anthony: Fix the muddy colors with custom palette
+Input: Chris: Make the colors in method 2 more noticeable 
+Input: Ryan: No fixes
