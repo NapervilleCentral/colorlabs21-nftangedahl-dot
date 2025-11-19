@@ -40,9 +40,9 @@ public class SheparFaireyLab
              else if (gray < 192) p.setColor(lightBlue);
              else p.setColor(offWhite);
          }
-
-         image.explore();
-         
+        //save method 1
+        image.explore();  
+        image.write("images/ShepardFairey.jpg");
          
         //method 2
         //find smallest and largest grayscale values
@@ -51,7 +51,7 @@ public class SheparFaireyLab
         //find min and max gray
         int smallest = 255;
         int biggest = 0;
-
+        //loop to get all the pixels and their grayscale
         for (Pixel p : image2.getPixels())
         {
             int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
@@ -74,12 +74,12 @@ public class SheparFaireyLab
         Color lightBlue2 = new Color(112,150,158);
         Color offWhite2  = new Color(252,227,166);
 
-        // loop recolor image
+        // loop to recolor image
         for (Pixel p : image2.getPixels())
         {
             int gray = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
 
-            // Apply intensity-based grouping
+            //Apply intensity-based grouping
             if (gray < cut1)
                 p.setColor(darkBlue2);
             else if (gray < cut2)
@@ -89,32 +89,31 @@ public class SheparFaireyLab
             else
                 p.setColor(offWhite2);
         }
-
-        image2.explore();
-        
+        //save second method
+        image2.explore();  
+        image2.write("images/intense.jpg");
     
-        //method 3 TRY 1
-        /*
+        //method 3 
         Picture image3 = new Picture("images/mepic.JPG");
     
 
-        // loops to look at every pixel
+        //loops to look at every pixel
         for (Pixel p : image3.getPixels())
         {
             int r = p.getRed();
             int g = p.getGreen();
             int b = p.getBlue();
 
-            // grayscale
+            //grayscale
             int gray = (r + g + b) / 3;
 
-            //custom palette colors
-            Color color1 = new Color(170, 0, 74);   // deep red/magenta
-            Color color2 = new Color(13, 52, 134);  // deep blue
-            Color color3 = new Color(201, 133, 0);  // gold
-            Color color4 = new Color(107, 184, 0);  // green
+            //custom palette
+            Color color1 = new Color(75, 37, 21);    // dark brown
+            Color color2 = new Color(210, 180, 140); // tan
+            Color color3 = new Color(34, 139, 34);   // green
+            Color color4 = new Color(255, 215, 0);   // yellow
 
-            // simple grayscale thresholds
+            //simple grayscale thresholds
             if (gray < 64)
                 p.setColor(color1);
             else if (gray < 120)
@@ -124,13 +123,12 @@ public class SheparFaireyLab
             else
                 p.setColor(color4);
         }
-
+        //save try 1
         image3.explore();
-        image3.write("images/SFtry1.jpg");   // save Method 3 Try 1
-        */
+        image3.write("images/SFtry1.jpg");   
         
         
-        //Method 3 try 2
+        //Method 3 try 2 (your custom palette)
         Picture image4 = new Picture("images/mepic.JPG");
         
         // loops to look at every pixel
@@ -140,20 +138,16 @@ public class SheparFaireyLab
             int g = p.getGreen();
             int b = p.getBlue();
         
-            // grayscale
+            //grayscale
             int gray = (r + g + b) / 3;
         
-            // boost contrast to avoid muddy image
-            gray = (int)(gray * 1.4);
-            if (gray > 255) gray = 255;
+            //new palette colors
+            Color color1 = new Color(170, 0, 74);   //deep magenta/red
+            Color color2 = new Color(13, 52, 134);  //strong blue
+            Color color3 = new Color(201, 133, 0);  //gold
+            Color color4 = new Color(107, 184, 0);  //green
         
-            // NEW palette colors
-            Color color1 = new Color(170, 0, 74);   // deep magenta/red
-            Color color2 = new Color(13, 52, 134);  // strong blue
-            Color color3 = new Color(201, 133, 0);  // gold
-            Color color4 = new Color(107, 184, 0);  // green
-        
-            // thresholds (much cleaner now)
+            //thresholds
             if (gray < 70)
                 p.setColor(color1);
             else if (gray < 140)
@@ -163,12 +157,77 @@ public class SheparFaireyLab
             else
                 p.setColor(color4);
         }
-
+        //save try 2
         image4.explore();
-        image4.write("images/SFmyFinal.jpg");    // final custom version
-        
+        image4.write("images/SFtry2.jpg");    
+
+
+        //Method 3 try 3 (higher contrast version)
+        Picture image5 = new Picture("images/mepic.JPG");
+
+        for (Pixel p : image5.getPixels())
+        {
+            int r = p.getRed();
+            int g = p.getGreen();
+            int b = p.getBlue();
+
+            //grayscale boosted
+            int gray = (int)((r + g + b) / 3 * 1.6);
+            if (gray > 255) gray = 255;
+
+            // same palette as try 2 to enhance
+            Color color1 = new Color(170, 0, 74);
+            Color color2 = new Color(13, 52, 134);
+            Color color3 = new Color(201, 133, 0);
+            Color color4 = new Color(107, 184, 0);
+
+            if (gray < 80)
+                p.setColor(color1);
+            else if (gray < 150)
+                p.setColor(color2);
+            else if (gray < 210)
+                p.setColor(color3);
+            else
+                p.setColor(color4);
+        }
+        //save try 3
+        image5.explore();
+        image5.write("images/SFtry3.jpg"); 
+
+
+        //Method 3 final
+        Picture image6 = new Picture("images/mepic.JPG");
+        //gets all pixels and assigns values
+        for (Pixel p : image6.getPixels())
+        {
+            int r = p.getRed();
+            int g = p.getGreen();
+            int b = p.getBlue();
+
+            int gray = (int)((r + g + b) / 3 * 1.3);
+            if (gray > 255) gray = 255;
+
+            // final palette
+            Color color1 = new Color(150, 0, 65);
+            Color color2 = new Color(20, 70, 150);
+            Color color3 = new Color(220, 150, 10);
+            Color color4 = new Color(120, 200, 20);
+            //buckets
+            if (gray < 75)
+                p.setColor(color1);
+            else if (gray < 145)
+                p.setColor(color2);
+            else if (gray < 205)
+                p.setColor(color3);
+            else
+                p.setColor(color4);
+        }
+        //final save
+        image6.explore();
+        image6.write("images/SFmyFinal.jpg"); 
     }
 }
+
 
 
          
