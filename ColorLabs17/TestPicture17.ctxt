@@ -2,5 +2,13 @@
 comment0.target=TestPicture17
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-comment1.text=\n\n\ main\ method,\ to\ test\ the\ picture\n\n\n\n
-numComments=2
+comment1.text=\r\n\ main\ method,\ to\ test\ the\ picture\r\n\r\n
+comment2.params=source
+comment2.target=void\ mirrorVertical(Picture)
+comment2.text=\r\n\ Method\ to\ mirror\ on\ a\ vertical\ line\ in\ the\ middle\r\n\ of\ the\ picture\ based\ on\ the\ width\r\n
+comment3.params=source\ target
+comment3.target=void\ copytoCanvas(Picture,\ Picture)
+comment3.text=\r\n\ copy\ one\ pic\ to\ another\ pic/canvas\r\n\ add\ two\ ints\ to\ params\ place\ you\ want\ pic\ on\ the\ target\r\n
+comment4.params=source
+comment4.target=void\ mirrorVertical2(Picture)
+numComments=5
