@@ -29,7 +29,7 @@ public class TestPicture17
      //make a copy of pic and rename pic
      //relative path
      
-     Picture pic = new Picture("images\\beach.jpg");
+     Picture pic = new Picture("images\\temple.jpg");
      Picture acanvas = new Picture("images\\canvas69(1).jpg");
      Picture temple = new Picture("images\\temple.jpg");
 
@@ -38,8 +38,10 @@ public class TestPicture17
      pic.explore();
      copytoCanvas(pic, acanvas);
      acanvas.explore();
-     mirrorVertical2(temple);
+     //mirrorVertical2(temple);
      temple.explore();
+     sepiaTint(pic);
+     copytoCanvas(pic, acanvas);
      /*
      //makes an array of pixels
      Pixel[] pixels;
@@ -282,7 +284,41 @@ public static void copytoCanvas(Picture source, Picture target){
     }
 }
 
-
+public static void sepiaTint(Picture source)
+{
+    Pixel pixel = null;
+    int red; 
+    int green;
+    int blue;
+    int grey;
+    
+    for (int x = 0; x < source.getWidth(); x++)
+    {
+        for (int y = 0; y < source.getHeight(); y++)
+        {
+            pixel = source.getPixel(x,y);
+            
+            red = pixel.getRed();
+            green = pixel.getGreen();
+            blue = pixel.getBlue();
+            //grayscale
+            grey = (red + green + blue) / 3;
+            
+            red = grey + 40;
+            green = grey + 20;
+            blue = grey; 
+            //keeps values under 255
+            if (red > 255) red = 255;
+            if (green > 255) green = 255;
+            if (blue > 255) blue = 255; 
+            
+            pixel.setRed(red);
+            pixel.setGreen(green);
+            pixel.setBlue(blue);
+        }
+    }
+}
+/*
 public static void mirrorVertical2(Picture source){
     int width = source.getWidth();
     int mirrorPoint = width/2;
@@ -302,7 +338,7 @@ public static void mirrorVertical2(Picture source){
    
    
 }
-
+/**/
 
 
 
