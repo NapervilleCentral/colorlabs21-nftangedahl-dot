@@ -1,14 +1,12 @@
 /**
- * Kevin Hayes
- * Test Picture Classes
- *
- * @author (Kevin Hayes)
- * @version (10-19-2016)
+ * Poster Project (Final)
+ * @author (Nick Tangedahl)
+ * @version ()
  */
 import java.awt.*;
 import java.util.*;
 import java.util.List; // resolves problem with java.awt.List and java.util.List
-public class TestPicture17
+public class Poster
 {
      //Picture pic = new Picture("images\\beach.jpg");
      //Picture acanvas = new Picture("images\\Canvas.jpg");
@@ -29,19 +27,157 @@ public class TestPicture17
      //make a copy of pic and rename pic
      //relative path
      
-     Picture pic = new Picture("images\\temple.jpg");
+     Picture pic = new Picture("images\\jpgthragg.jpg");
+     Picture pic2 = new Picture("images\\jpgthragg.jpg");
      Picture acanvas = new Picture("images\\canvas69(1).jpg");
-     Picture temple = new Picture("images\\temple.jpg");
+     //Picture temple = new Picture("images\\temple.jpg");
 
      //apic.explore();
-     mirrorVertical(pic);
-     pic.explore();
-     copytoCanvas(pic, acanvas);
-     acanvas.explore();
+     //pic.explore();
+     copytoCanvas(pic, acanvas, 0, 0);
+     //acanvas.explore();
+     //pic.explore();
+     //acanvas.explore();
      //mirrorVertical2(temple);
-     temple.explore();
-     sepiaTint(pic);
-     copytoCanvas(pic, acanvas);
+     //pic.explore();
+     mirrorVertical(pic);
+     copytoCanvas(pic, acanvas, 1600, 0);
+     sepiaTint(pic2);
+     copytoCanvas(pic2, acanvas, 3200, 0);
+     acanvas.explore();
+     //recursiveMirror(pic, 15, 20);
+     //copytoCanvas(pic, acanvas);
+     //acanvas.explore();
+     
+
+   
+
+}//main
+
+/**
+ * Method to mirror on a vertical line in the middle
+ * of the picture based on the width
+ */
+
+public static void mirrorVertical(Picture source){
+    int width = source.getWidth();
+    int mirrorPoint = width/2;
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+   
+    // loop thru all the rows
+    for (int y = 0; y<source.getHeight(); y++){
+        //loop from 0 to the middle(mirror Point)
+        for (int x = 0; x<mirrorPoint; x++){
+            leftPixel = source.getPixel(x,y);
+            rightPixel = source.getPixel(width -1 -x,y);
+            rightPixel.setColor(leftPixel.getColor());
+        }
+    }
+   
+   
+   
+}//mirrorVertical
+
+/**
+ * copy one pic to another pic/canvas
+ * add two ints to params place you want pic on the target
+ */
+public static void copytoCanvas(Picture source, Picture target,int placx, int placy){
+    Pixel sourcePix = null;
+    Pixel targetPix = null;
+   
+    //loop thru jcolumns (targetX is the starting point on the Canvas) sourceX+=2 - smaller copy every other pixel 
+    //sourceX += .5 - larger copy every other pixel twice, cast as int in the 
+    for (int sourceX = 0,targetX = placx; sourceX < source.getWidth();sourceX++,targetX++)
+    {
+        
+        for (int sourceY = 0,targetY = placy; sourceY < source.getHeight();sourceY++,targetY++){
+            sourcePix = source.getPixel(sourceX, sourceY);
+            targetPix = target.getPixel(targetX, targetY);
+            targetPix.setColor(sourcePix.getColor());
+        }
+    }
+}
+
+public static void sepiaTint(Picture source)
+{
+    Pixel pixel = null;
+    int red; 
+    int green;
+    int blue;
+    int grey;
+    
+    for (int x = 0; x < source.getWidth(); x++)
+    {
+        for (int y = 0; y < source.getHeight(); y++)
+        {
+            pixel = source.getPixel(x,y);
+            
+            red = pixel.getRed();
+            green = pixel.getGreen();
+            blue = pixel.getBlue();
+            //grayscale
+            grey = (red + green + blue) / 3;
+            
+            red = grey + 40;
+            green = grey + 20;
+            blue = grey; 
+            //keeps values under 255
+            if (red > 255) red = 255;
+            if (green > 255) green = 255;
+            if (blue > 255) blue = 255; 
+            
+            pixel.setRed(red);
+            pixel.setGreen(green);
+            pixel.setBlue(blue);
+        }
+    }
+}
+public static void recursiveMirror(Picture source, int randox, int randoy)
+{
+    int width = source.getWidth();
+    //base case
+    if (randoy >= source.getHeight())
+    {
+        return;
+    }
+    //next row
+    if(randox >= width / 2)
+    {
+        recursiveMirror(source, 0, randoy + 1);
+        return;
+    }
+    Pixel leftPixel = source.getPixel(randox, randoy);
+    Pixel rightPixel = source.getPixel(width - 1 - randox, randoy);
+    rightPixel.setColor(leftPixel.getColor());
+    
+    recursiveMirror(source, randox + 1, randoy);
+    
+}
+
+
+ public static void mirrorVertical2(Picture source){
+    int width = source.getWidth();
+    int mirrorPoint = width/2;
+    Pixel leftPixel = null;
+    Pixel rightPixel = null;
+   
+    // loop thru all the rows
+    for (int y = 0; y<(source.getHeight()/4); y++){
+        //loop from 0 to the middle(mirror Point)
+        for (int x = 0; x<mirrorPoint; x++){
+            leftPixel = source.getPixel(x,y);
+            rightPixel = source.getPixel(width -1 -x,y);
+            rightPixel.setColor(leftPixel.getColor());
+        }
+    }
+   
+   
+   
+}
+/**/
+
      /*
      //makes an array of pixels
      Pixel[] pixels;
@@ -231,137 +367,6 @@ final double  FACTOR = .5;
   /**/
     //write/save a picture as a file
     //ferris1.write("images/ferris11.jpg");
-
-   
-
-}//main
-
-
-
-/**
- * Method to mirror on a vertical line in the middle
- * of the picture based on the width
- */
-
-public static void mirrorVertical(Picture source){
-    int width = source.getWidth();
-    int mirrorPoint = width/2;
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-   
-    // loop thru all the rows
-    for (int y = 0; y<source.getHeight(); y++){
-        //loop from 0 to the middle(mirror Point)
-        for (int x = 0; x<mirrorPoint; x++){
-            leftPixel = source.getPixel(x,y);
-            rightPixel = source.getPixel(width -1 -x,y);
-            rightPixel.setColor(leftPixel.getColor());
-        }
-    }
-   
-   
-   
-}//mirrorVertical
-
-/**
- * copy one pic to another pic/canvas
- * add two ints to params place you want pic on the target
- */
-public static void copytoCanvas(Picture source, Picture target){
-    Pixel sourcePix = null;
-    Pixel targetPix = null;
-   
-    //loop thru jcolumns (targetX is the starting point on the Canvas) sourceX+=2 - smaller copy every other pixel 
-    //sourceX += .5 - larger copy every other pixel twice, cast as int in the 
-    for (int sourceX = 0,targetX = 0; sourceX < source.getWidth();sourceX++,targetX++)
-    {
-        
-        for (int sourceY = 0,targetY = 0; sourceY < source.getHeight();sourceY++,targetY++){
-            sourcePix = source.getPixel(sourceX, sourceY);
-            targetPix = target.getPixel(targetX, targetY);
-            targetPix.setColor(sourcePix.getColor());
-        }
-    }
-}
-
-public static void sepiaTint(Picture source)
-{
-    Pixel pixel = null;
-    int red; 
-    int green;
-    int blue;
-    int grey;
-    
-    for (int x = 0; x < source.getWidth(); x++)
-    {
-        for (int y = 0; y < source.getHeight(); y++)
-        {
-            pixel = source.getPixel(x,y);
-            
-            red = pixel.getRed();
-            green = pixel.getGreen();
-            blue = pixel.getBlue();
-            //grayscale
-            grey = (red + green + blue) / 3;
-            
-            red = grey + 40;
-            green = grey + 20;
-            blue = grey; 
-            //keeps values under 255
-            if (red > 255) red = 255;
-            if (green > 255) green = 255;
-            if (blue > 255) blue = 255; 
-            
-            pixel.setRed(red);
-            pixel.setGreen(green);
-            pixel.setBlue(blue);
-        }
-    }
-}
-/*
-public static void recursiveMirror(Picture source, int x, int y)
-{
-    int width = source.getWidth();
-    
-    //base case
-    if (y >= source.getHeight())
-    {
-        return; 
-    }
-    //next row
-    if (x >= width / 2)
-    {
-        recursiveMirror(source, 0, y + 1);
-        return;
-    }
-    Pixel leftPixel = source.getPixel(x,y);
-    Pixel rightPixel = source.getPixel(width - 1 - x, y);
-    rightPixel.setColor(leftPixel.getColor());
-    
-    recursiveMirror(source, x + 1, y);
-}
-
- public static void mirrorVertical2(Picture source){
-    int width = source.getWidth();
-    int mirrorPoint = width/2;
-    Pixel leftPixel = null;
-    Pixel rightPixel = null;
-   
-    // loop thru all the rows
-    for (int y = 0; y<(source.getHeight()/4); y++){
-        //loop from 0 to the middle(mirror Point)
-        for (int x = 0; x<mirrorPoint; x++){
-            leftPixel = source.getPixel(x,y);
-            rightPixel = source.getPixel(width -1 -x,y);
-            rightPixel.setColor(leftPixel.getColor());
-        }
-    }
-   
-   
-   
-}
-/**/
-
 
 
 
