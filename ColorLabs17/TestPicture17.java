@@ -319,7 +319,29 @@ public static void sepiaTint(Picture source)
     }
 }
 /*
-public static void mirrorVertical2(Picture source){
+public static void recursiveMirror(Picture source, int x, int y)
+{
+    int width = source.getWidth();
+    
+    //base case
+    if (y >= source.getHeight())
+    {
+        return; 
+    }
+    //next row
+    if (x >= width / 2)
+    {
+        recursiveMirror(source, 0, y + 1);
+        return;
+    }
+    Pixel leftPixel = source.getPixel(x,y);
+    Pixel rightPixel = source.getPixel(width - 1 - x, y);
+    rightPixel.setColor(leftPixel.getColor());
+    
+    recursiveMirror(source, x + 1, y);
+}
+
+ public static void mirrorVertical2(Picture source){
     int width = source.getWidth();
     int mirrorPoint = width/2;
     Pixel leftPixel = null;
