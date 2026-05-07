@@ -35,19 +35,19 @@ public class Poster
 
      //apic.explore();
      //pic.explore();
-     copytoCanvas(pic, acanvas, 0, 0);
+     //copytoCanvas(pic, acanvas, 0, 0);
      //acanvas.explore();
      //pic.explore();
      //acanvas.explore();
      //mirrorVertical2(temple);
      //pic.explore();
-     mirrorVertical(pic);
-     copytoCanvas(pic, acanvas, 1600, 0);
-     sepiaTint(pic2);
-     copytoCanvas(pic2, acanvas, 3200, 0);
-     acanvas.explore();
+     //mirrorVertical(pic);
+     //copytoCanvas(pic, acanvas, 1600, 0);
+     //sepiaTint(pic2);
+     //copytoCanvas(pic2, acanvas, 3200, 0);
+     //acanvas.explore();
      recursiveMirror(pic3, 0, 0);
-     copytoCanvas(pic3, acanvas, 4800, 0);
+     copytoCanvasSmall(pic3, acanvas, 0, 0);
      acanvas.explore();
      
 
@@ -101,6 +101,21 @@ public static void copytoCanvas(Picture source, Picture target,int placx, int pl
     }
 }
 
+public static void copytoCanvasSmall(Picture source, Picture target, int placx, int placy)
+{
+    Pixel sourcePix = null;
+    Pixel targetPix = null;
+    
+    for (int sourceX = 0, targetX = placx; sourceX < source.getWidth() && targetX < target.getWidth(); sourceX += 2, targetX++)
+    {
+        for (int sourceY = 0, targetY = placy; sourceY < source.getHeight() && targetY < target.getHeight(); sourceY += 2, targetY++)
+        {
+            sourcePix = source.getPixel(sourceX, sourceY);
+            targetPix = target.getPixel(targetX, targetY);
+            targetPix.setColor(sourcePix.getColor());
+        }
+    }
+}
 public static void sepiaTint(Picture source)
 {
     Pixel pixel = null;
@@ -137,10 +152,9 @@ public static void sepiaTint(Picture source)
 }
 public static void recursiveMirror(Picture source, int x, int y)
 {
-    if (y >= source.getHeight())
-    {
+    int maxY = 1;
+    if (y >= maxY || y >= source.getHeight())
         return;
-    }
     
     if (x >= source.getWidth() / 2)
     {
@@ -179,8 +193,10 @@ public static void recursiveMirror(Picture source, int x, int y)
 }
 /**/
 
-     /*
-     //makes an array of pixels
+     
+/*
+     
+ ///makes an array of pixels
      Pixel[] pixels;
      Pixel[] pixels2;
      Pixel[] pixels3;
@@ -196,6 +212,57 @@ public static void recursiveMirror(Picture source, int x, int y)
      pixels6 = pic6.getPixels();
 
      
+     public static void posterize(Picture source)
+     {
+         Pixel pixel = null;
+         
+         int red; 
+         int green; 
+         int blue;
+         
+         for (int x = 0; x < source.getWidth(); x++)
+         {
+             for (int y = 0; y < source.getHeight(); y++)
+             {
+                 pixel = source.getPixel(x, y);
+                 red - pixel.getRed();
+                 green = pixel.getGreen();
+                 blue = pixel.getBlue();
+                 //red
+                 if (red < 64)
+                     red = 32;
+                else if (red < 128)
+                    red = 96;
+                else if (red < 192)
+                    red = 160;
+                else 
+                    red = 224;
+                
+                //green
+                if (green < 64)
+                    green = 32;
+                else if (green < 128)
+                    green = 160;
+                else if (green < 192)
+                    green = 160;
+                else 
+                    green = 224;
+                
+                //blue
+                if (blue < 64)
+                    blue = 32;
+                else if (blue < 128)
+                    blue = 96;
+                else if (blue < 192)
+                    blue = 160;
+                else = 224;
+                
+                pixel.setRed(red)
+                pixel.setGreen(green);
+                pixel.setBlue(blue);
+             }
+         }
+     }
      
      
 
