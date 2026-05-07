@@ -29,6 +29,7 @@ public class Poster
      
      Picture pic = new Picture("images\\jpgthragg.jpg");
      Picture pic2 = new Picture("images\\jpgthragg.jpg");
+     Picture pic3 = new Picture("images\\jpgthragg.jpg");
      Picture acanvas = new Picture("images\\canvas69(1).jpg");
      //Picture temple = new Picture("images\\temple.jpg");
 
@@ -45,9 +46,9 @@ public class Poster
      sepiaTint(pic2);
      copytoCanvas(pic2, acanvas, 3200, 0);
      acanvas.explore();
-     //recursiveMirror(pic, 15, 20);
-     //copytoCanvas(pic, acanvas);
-     //acanvas.explore();
+     recursiveMirror(pic3, 0, 0);
+     copytoCanvas(pic3, acanvas, 4800, 0);
+     acanvas.explore();
      
 
    
@@ -134,25 +135,25 @@ public static void sepiaTint(Picture source)
         }
     }
 }
-public static void recursiveMirror(Picture source, int randox, int randoy)
+public static void recursiveMirror(Picture source, int x, int y)
 {
-    int width = source.getWidth();
-    //base case
-    if (randoy >= source.getHeight())
+    if (y >= source.getHeight())
     {
         return;
     }
-    //next row
-    if(randox >= width / 2)
-    {
-        recursiveMirror(source, 0, randoy + 1);
-        return;
-    }
-    Pixel leftPixel = source.getPixel(randox, randoy);
-    Pixel rightPixel = source.getPixel(width - 1 - randox, randoy);
-    rightPixel.setColor(leftPixel.getColor());
     
-    recursiveMirror(source, randox + 1, randoy);
+    if (x >= source.getWidth() / 2)
+    {
+        recursiveMirror(source, 0, y + 1);
+        return;
+    }
+    
+    Pixel leftPixel = source.getPixel(x, y);
+    Pixel rightPixel = source.getPixel(source.getWidth() - 1 - x, y);
+    
+    rightPixel.setColor(leftPixel.getColor());
+    recursiveMirror(source, x + 1, y);
+    
     
 }
 
