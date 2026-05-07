@@ -30,24 +30,21 @@ public class Poster
      Picture pic = new Picture("images\\jpgthragg.jpg");
      Picture pic2 = new Picture("images\\jpgthragg.jpg");
      Picture pic3 = new Picture("images\\jpgthragg.jpg");
+     Picture pic4 = new Picture("images\\jpgthragg.jpg");
      Picture acanvas = new Picture("images\\canvas69(1).jpg");
      //Picture temple = new Picture("images\\temple.jpg");
 
-     //apic.explore();
-     //pic.explore();
-     //copytoCanvas(pic, acanvas, 0, 0);
-     //acanvas.explore();
-     //pic.explore();
-     //acanvas.explore();
-     //mirrorVertical2(temple);
-     //pic.explore();
-     //mirrorVertical(pic);
-     //copytoCanvas(pic, acanvas, 1600, 0);
-     //sepiaTint(pic2);
-     //copytoCanvas(pic2, acanvas, 3200, 0);
+     
+     copytoCanvasSmall(pic, acanvas, 0, 0);
+     mirrorVertical(pic);
+     copytoCanvasSmall(pic, acanvas, 800, 0);
+     sepiaTint(pic2);
+     copytoCanvasSmall(pic2, acanvas, 1600, 0);
      //acanvas.explore();
      recursiveMirror(pic3, 0, 0);
-     copytoCanvasSmall(pic3, acanvas, 0, 0);
+     copytoCanvasSmall(pic3, acanvas, 0, 450);
+     posterize(pic4);
+     copytoCanvasSmall(pic4, acanvas, 800, 450);   
      acanvas.explore();
      
 
@@ -152,11 +149,11 @@ public static void sepiaTint(Picture source)
 }
 public static void recursiveMirror(Picture source, int x, int y)
 {
-    int maxY = 1;
-    if (y >= maxY || y >= source.getHeight())
+    int maxY = 8;
+    if (y >= maxY || y >= source.getHeight() / 4)
         return;
     
-    if (x >= source.getWidth() / 2)
+    if (x >= source.getWidth() / 4)
     {
         recursiveMirror(source, 0, y + 1);
         return;
@@ -186,8 +183,56 @@ public static void recursiveMirror(Picture source, int x, int y)
             rightPixel = source.getPixel(width -1 -x,y);
             rightPixel.setColor(leftPixel.getColor());
         }
+    }  
     }
-   
+    public static void posterize(Picture source)
+    {
+        Pixel pixel = null;
+        int red, green, blue;
+        for (int x = 0; x < source.getWidth(); x++)
+        {
+            for (int y = 0; y < source.getHeight(); y++)
+            {
+                pixel = source.getPixel(x, y);
+                red = pixel.getRed();
+                green = pixel.getGreen();
+                blue = pixel.getBlue();
+                
+                //red
+                if (red < 64)
+                    red = 32;
+                else if (red < 128)
+                    red = 96;
+                else if (red < 192)
+                    red = 160;
+                else 
+                    red = 224;
+                //green
+                if (green < 64)
+                    green = 32;
+                else if (green < 128)
+                    green = 96;
+                else if (green < 192)
+                    green = 160;
+                else 
+                    green = 224;
+                //blue
+                if (blue < 64)
+                    blue = 32;
+                else if (blue < 128)
+                    blue = 96;
+                else if (blue < 192)
+                    blue = 160;
+                else
+                    blue = 224;
+                
+                pixel.setRed(red);
+                pixel.setGreen(green);
+                pixel.setBlue(blue);
+            }
+            
+        }
+       
    
    
 }
@@ -195,7 +240,6 @@ public static void recursiveMirror(Picture source, int x, int y)
 
      
 /*
-     
  ///makes an array of pixels
      Pixel[] pixels;
      Pixel[] pixels2;
@@ -212,57 +256,7 @@ public static void recursiveMirror(Picture source, int x, int y)
      pixels6 = pic6.getPixels();
 
      
-     public static void posterize(Picture source)
-     {
-         Pixel pixel = null;
-         
-         int red; 
-         int green; 
-         int blue;
-         
-         for (int x = 0; x < source.getWidth(); x++)
-         {
-             for (int y = 0; y < source.getHeight(); y++)
-             {
-                 pixel = source.getPixel(x, y);
-                 red - pixel.getRed();
-                 green = pixel.getGreen();
-                 blue = pixel.getBlue();
-                 //red
-                 if (red < 64)
-                     red = 32;
-                else if (red < 128)
-                    red = 96;
-                else if (red < 192)
-                    red = 160;
-                else 
-                    red = 224;
-                
-                //green
-                if (green < 64)
-                    green = 32;
-                else if (green < 128)
-                    green = 160;
-                else if (green < 192)
-                    green = 160;
-                else 
-                    green = 224;
-                
-                //blue
-                if (blue < 64)
-                    blue = 32;
-                else if (blue < 128)
-                    blue = 96;
-                else if (blue < 192)
-                    blue = 160;
-                else = 224;
-                
-                pixel.setRed(red)
-                pixel.setGreen(green);
-                pixel.setBlue(blue);
-             }
-         }
-     }
+     
      
      
 
