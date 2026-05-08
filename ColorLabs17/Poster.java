@@ -31,6 +31,8 @@ public class Poster
      Picture pic2 = new Picture("images\\jpgthragg.jpg");
      Picture pic3 = new Picture("images\\jpgthragg.jpg");
      Picture pic4 = new Picture("images\\jpgthragg.jpg");
+     Picture pic5 = new Picture("images\\jpgthragg.jpg");
+     Picture blendPic = new Picture("images\\point.jpg");
      Picture acanvas = new Picture("images\\canvas69(1).jpg");
      //Picture temple = new Picture("images\\temple.jpg");
 
@@ -41,10 +43,12 @@ public class Poster
      sepiaTint(pic2);
      copytoCanvasSmall(pic2, acanvas, 1600, 0);
      //acanvas.explore();
-     recursiveMirror(pic3, 0, 0);
+     recursiveCorner(pic3, acanvas, 0, 450, 2);
      copytoCanvasSmall(pic3, acanvas, 0, 450);
      posterize(pic4);
-     copytoCanvasSmall(pic4, acanvas, 800, 450);   
+     copytoCanvasSmall(pic4, acanvas, 800, 450);  
+     blend(pic5, blendPic);
+     copytoCanvasSmall(pic5, acanvas, 1600, 450);
      acanvas.explore();
      
 
@@ -147,25 +151,23 @@ public static void sepiaTint(Picture source)
         }
     }
 }
-public static void recursiveMirror(Picture source, int x, int y)
+public static void recursiveCorner(Picture source, Picture target, int placx, int placy, int scale)
 {
-    int maxY = 8;
-    if (y >= maxY || y >= source.getHeight() / 4)
+    if (scale > 16)
         return;
+    Pixel sourcePix = null;
+    Pixel targetPix = null;
     
-    if (x >= source.getWidth() / 4)
+    for (int sourceX = 0, targetX = placx; sourceX < source.getWidth() && targetX < target.getWidth(); sourceX += scale, targetX++)
     {
-        recursiveMirror(source, 0, y + 1);
-        return;
+        for(int sourceY = 0, targetY = placy; sourceY < source.getHeight() && targetY < target.getHeight(); sourceY += scale, targetY++)
+        {
+            sourcePix = source.getPixel(sourceX, sourceY);
+            targetPix = target.getPixel(targetX, targetY);
+            targetPix.setColor(sourcePix.getColor());
+        }
     }
-    
-    Pixel leftPixel = source.getPixel(x, y);
-    Pixel rightPixel = source.getPixel(source.getWidth() - 1 - x, y);
-    
-    rightPixel.setColor(leftPixel.getColor());
-    recursiveMirror(source, x + 1, y);
-    
-    
+    recursiveCorner(source, target, placx + source.getWidth() / scale, placy + source.getHeight() / scale, scale * 2);
 }
 
 
@@ -185,7 +187,7 @@ public static void recursiveMirror(Picture source, int x, int y)
         }
     }  
     }
-    public static void posterize(Picture source)
+public static void posterize(Picture source)
     {
         Pixel pixel = null;
         int red, green, blue;
@@ -231,12 +233,35 @@ public static void recursiveMirror(Picture source, int x, int y)
                 pixel.setBlue(blue);
             }
             
+        } 
         }
+public static void blend(Picture source, Picture source2)
+    {
+        Pixel pixel1 = null;
+        Pixel pixel2 = null;
+        int red, green, blue; 
+        for (int x = 0; x < source.getWidth() && x < source2.getWidth(); x++)
+        {
+            for (int y = 0; y < source.getHeight() && y < source2.getHeight(); y++)
+            {
+                pixel1 = source.getPixel(x,y);
+                pixel2 = source2.getPixel(x,y);
+                red = (pixel1.getRed() + pixel2.getRed()) / 2; 
+                green = (pixel1.getGreen() + pixel2.getGreen()) / 2;
+                blue = (pixel1.getBlue() + pixel2.getBlue()) / 2;
+                
+                pixel1.setRed(red);
+                pixel1.setGreen(green);
+                pixel1.setBlue(blue);
+            }
+        }
+    }
+}
        
    
    
-}
-/**/
+
+//**/
 
      
 /*
@@ -439,4 +464,3 @@ final double  FACTOR = .5;
 
 
 //class
-}
