@@ -43,15 +43,14 @@ public class Poster
      sepiaTint(pic2);
      copytoCanvasSmall(pic2, acanvas, 1600, 0);
      //acanvas.explore();
-     recursiveCorner(pic3, acanvas, 0, 450, 2);
-     
      copytoCanvasSmall(pic3, acanvas, 0, 450);
+     recursiveCorner(pic3, acanvas, 0, 450, 4, pic3.getWidth() / 2, pic3.getHeight() / 2);
      posterize(pic4);
      copytoCanvasSmall(pic4, acanvas, 800, 450);  
      blend(pic5, blendPic);
      copytoCanvasSmall(pic5, acanvas, 1600, 450);
      acanvas.explore();
-     
+     acanvas.write("images/finalcollage.jpg");
 
    
 
@@ -152,7 +151,8 @@ public static void sepiaTint(Picture source)
         }
     }
 }
-public static void recursiveCorner(Picture source, Picture target, int placx, int placy, int scale)
+public static void recursiveCorner(Picture source, Picture target, int placx, int placy,
+                                   int scale, int areaWidth, int areaHeight)
 {
     if (scale > 32)
         return;
@@ -160,27 +160,26 @@ public static void recursiveCorner(Picture source, Picture target, int placx, in
     int copyWidth = source.getWidth() / scale;
     int copyHeight = source.getHeight() / scale;
 
-    if (copyWidth < 2 || copyHeight < 2)
+    if (copyWidth < 3 || copyHeight < 3)
         return;
+
+    int newX = placx + areaWidth / 2;
+    int newY = placy + areaHeight / 2;
 
     Pixel sourcePix = null;
     Pixel targetPix = null;
 
-    for (int targetX = placx; targetX < placx + copyWidth && targetX < target.getWidth(); targetX++)
+    for (int x = 0; x < copyWidth && newX + x < target.getWidth(); x++)
     {
-        for (int targetY = placy; targetY < placy + copyHeight && targetY < target.getHeight(); targetY++)
+        for (int y = 0; y < copyHeight && newY + y < target.getHeight(); y++)
         {
-            int sourceX = (targetX - placx) * scale;
-            int sourceY = (targetY - placy) * scale;
-
-            sourcePix = source.getPixel(sourceX, sourceY);
-            targetPix = target.getPixel(targetX, targetY);
-
+            sourcePix = source.getPixel(x * scale, y * scale);
+            targetPix = target.getPixel(newX + x, newY + y);
             targetPix.setColor(sourcePix.getColor());
         }
     }
 
-    recursiveCorner(source, target, placx + copyWidth / 2, placy + copyHeight / 2, scale * 2);
+    recursiveCorner(source, target, newX, newY, scale * 2, copyWidth, copyHeight);
 }
 
 
